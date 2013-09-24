@@ -13,13 +13,14 @@ var manArrLength, rewArrLength;
 var rewardsname = document.getElementById('rewardsname'),
 	rewardsnum = document.getElementById('rewardsnum'),
 	addrew = document.getElementById('addrew'),
-	mannum = document.getElementById('mannum'),
+	totalman = document.getElementById('totalman'),
 	incman = document.getElementById('incman');
 
 //初始化事件以及ID链接
 var choMan = document.getElementById('choman'),
 	choRew = document.getElementById('chorew'),
     stopLoop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
     title = document.getElementById('title'),
     p = document.getElementById('p'),
     rewardsInfo = document.getElementById('rewardsinfo');
@@ -29,6 +30,7 @@ incman.value = '设定人数';
 choMan.value = '挑选观众';
 choRew.value = '抽取奖品';
 stopLoop.value = '停！';
+clear.value = 'clearData';
 
 addrew.onclick = function () {
 	var inputName = rewardsname.value,
@@ -44,7 +46,7 @@ addrew.onclick = function () {
 	
 };
 incman.onclick = function () {
-	var inputManNum = +(mannum.value);
+	var inputManNum = +(totalman.value);
 	if (!isNaN(inputManNum) && inputManNum) {
 		manArrLength = inputManNum;
 		enable2 = true;
@@ -64,6 +66,9 @@ stopLoop.onclick = function () {
 	if (timer)
 		stop(timer);
 };
+clear.onclick = function () {
+	init();
+}
 
 
 function choM(){
@@ -99,8 +104,7 @@ function stop(timer){
 	clearInterval(timer);
 	if (flag) {
 		p.innerHTML = '恭喜你' 
-					+ mannum 
-					+ '号，你获得了 ' 
+					+ (mannum == 0 ? ('获得了 ') : (mannum + '号，你获得了 '))
 					+ reward.name;
 		reduceReward(1, rewindex - 1);
 		showInfo();
@@ -131,4 +135,11 @@ function showInfo() {
 		info += rewardsArr[i].name + ' 还剩 ' + rewardsArr[i].number + '<br>';
 	}
 	rewardsinfo.innerHTML = info;
+}
+function init() {
+	var man = document.getElementById('man');
+		man.innerHTML = '';
+	var rewards = document.getElementById('rewards');
+		rewards.innerHTML = '';
+	p.innerHTML = '';
 }
