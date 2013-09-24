@@ -9,17 +9,27 @@
 		<title id ='title'></title>
 	</head>
 	<body>
-		<h1 id='p'></h1>
-		<br>
-		<lable id='man'></lable>
-		<br>
-		<lable id='rewards'></lable>
-		<br>
-
 	<div class='container'>
-		
-		<div class="panel panel-primary">
-			<div class="panel-heading">奖品设置</div>
+		<br><br>
+		<div class="row">
+			<div class="panel panel-success">
+			  <div class="panel-heading"><h4>SoftWare Freedom Day</h4></div>
+			  <div class="panel-body">
+			    <div class="col-md-3">
+			<table class="table table-hover" id = 'rewardsinfo'></table>
+			<input type = 'button' id='choman' class='btn btn-success'>
+			<input type = 'button' id='chorew' class='btn btn-success'>
+			<input type = 'button' id='stop' class='btn btn-danger'>
+		</div>
+		<div class="col-md-6">
+			<div class="jumbotron">
+			    <h2 id="p"></h2>
+			    <h3 id='man'></h3>
+				<h3 id='rewards'></h3>
+			    <input type="button" id="clear" class="btn btn-primary btn-lg">
+			</div>
+		</div>
+		<div class="col-md-3">
 			<div class="panel-body">
 				<div class="form-group">
 					<label for='rewardsname'>添加奖品</label>
@@ -30,13 +40,7 @@
 					<input type = 'text' id="rewardsnum" class="form-control">
 				</div>
 				<input type = 'button' id='addrew' class="btn btn-primary">
-				<br>
-				<h3 id='rewardsinfo'></h3>
 			</div>
-		</div>
-
-		<div class="panel panel-primary">
-			<div class="panel-heading">人数设置</div>
 			<div class="panel-body">
 				<div class="form-group">
 					<label for='mannum'>到场人数:</label>
@@ -44,18 +48,14 @@
 				</div>
 				<input type = 'button' id='incman' class="btn btn-primary">
 			</div>
+			
 		</div>
-
-		<div class="panel panel-primary">
-			<div class="panel-heading">开始抽奖</div>
-			<div class="panel-body">
-				<input type = 'button' id='choman' class='btn btn-success'>
-				<input type = 'button' id='chorew' class='btn btn-success'>
-				<input type = 'button' id='stop' class='btn btn-danger'>
-				<input type = 'button' id='clear' class="btn btn-primary">
+			  </div>
 			</div>
-		</div>
+		<div class="clearfix visible-xs"></div>
+		
 
+		</div>
 	</div>
 
 	<script src='./script.js'></script>

@@ -30,7 +30,7 @@ incman.value = '设定人数';
 choMan.value = '挑选观众';
 choRew.value = '抽取奖品';
 stopLoop.value = '停！';
-clear.value = 'clearData';
+clear.value = 'Console.clear()';
 
 addrew.onclick = function () {
 	var inputName = rewardsname.value,
@@ -103,9 +103,12 @@ function startRew(){
 function stop(timer){
 	clearInterval(timer);
 	if (flag) {
-		p.innerHTML = '恭喜你' 
-					+ (mannum == 0 ? ('获得了 ') : (mannum + '号，你获得了 '))
-					+ reward.name;
+		p.innerHTML = '';
+		var text = '恭喜你' 
+				 + (mannum == 0 ? ('赢得了 ') : (mannum + '号，你赢得了 '))
+				 + reward.name;
+		var info = document.createTextNode(text);
+		p.appendChild(info);
 		reduceReward(1, rewindex - 1);
 		showInfo();
 	}
@@ -130,11 +133,37 @@ function reduceReward(number, index) {
 		delReward(index);
 }
 function showInfo() {
-	var info = '剩余奖品：<br>';
+	rewardsInfo.innerHTML = '';
+	var thead = document.createElement('thead'),
+		tr = document.createElement('tr'),
+		th1 = document.createElement('th'),
+		th2 = document.createElement('th'),
+		headtext1 = document.createTextNode('奖品'),
+		headtext2 = document.createTextNode('数量'),
+		img = document.createElement('span');
+	th1.appendChild(headtext1);
+	th2.appendChild(headtext2);
+	tr.appendChild(th1);
+	tr.appendChild(th2);
+	thead.appendChild(tr);
+	rewardsInfo.appendChild(thead);
+
+	var tbody = document.createElement('tbody');
 	for (i in rewardsArr) {
-		info += rewardsArr[i].name + ' 还剩 ' + rewardsArr[i].number + '<br>';
+		var tr = document.createElement('tr'),
+			td1 = document.createElement('td'),
+			td2 = document.createElement('td'),
+			text1 = rewardsArr[i].name,
+			text2 = rewardsArr[i].number,
+			iteminfo1 = document.createTextNode(text1),
+			iteminfo2 = document.createTextNode(text2);
+		td1.appendChild(iteminfo1);
+		td2.appendChild(iteminfo2);
+		tr.appendChild(td1);
+		tr.appendChild(td2);
+		tbody.appendChild(tr);
 	}
-	rewardsinfo.innerHTML = info;
+	rewardsInfo.appendChild(tbody);
 }
 function init() {
 	var man = document.getElementById('man');
