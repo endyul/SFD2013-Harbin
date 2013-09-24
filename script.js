@@ -68,8 +68,35 @@ stopLoop.onclick = function () {
 };
 clear.onclick = function () {
 	init();
-}
+};
+rewardsInfo.onclick = function (e) {
+	if (e.target && e.target.nodeName.toLowerCase() === 'td') {
+		var childs = e.target.parentNode.childNodes,
+			name, number;
+		for (i in childs) {
+			if (childs[i].mark == 'reward')
+				name = childs[i].textContent;
+			if (childs[i].mark == 'number')
+				number = +(childs[i].textContent);
+		}
+		console.log(name);
+		viaRewards(name);
+	}
+};
 
+function viaRewards(name) {
+	for (var i = 0; i < rewardsArr.length; i++) {
+		if (name == rewardsArr[i].name) {
+			rewindex = i + 1;
+			reward = rewardsArr[i];
+		}
+	}
+	init();
+	var text = name;
+	var info = document.createTextNode(text);
+	p.appendChild(info);
+	flag = true;
+}
 
 function choM(){
 	var man = document.getElementById('man');
@@ -157,6 +184,8 @@ function showInfo() {
 			text2 = rewardsArr[i].number,
 			iteminfo1 = document.createTextNode(text1),
 			iteminfo2 = document.createTextNode(text2);
+		td1.mark = 'reward';
+		td2.mark = 'number';
 		td1.appendChild(iteminfo1);
 		td2.appendChild(iteminfo2);
 		tr.appendChild(td1);
