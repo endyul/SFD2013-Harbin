@@ -216,6 +216,8 @@ function init() {
 function manual() {
 	var manualAdd = document.getElementById('manual');
 	var memberNum = +(manualAdd.value);
-	mannum = memberNum;
-	flag = true;
+	if (memberNum <= manArrLength && enable2) {
+		mannum = memberNum;
+		flag = true;
+	}
 }
