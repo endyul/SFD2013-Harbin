@@ -14,7 +14,8 @@ var rewardsname = document.getElementById('rewardsname'),
 	rewardsnum = document.getElementById('rewardsnum'),
 	addrew = document.getElementById('addrew'),
 	totalman = document.getElementById('totalman'),
-	incman = document.getElementById('incman');
+	incman = document.getElementById('incman'),
+	manualAddbtn = document.getElementById('manualadd');
 
 //初始化事件以及ID链接
 var choMan = document.getElementById('choman'),
@@ -23,7 +24,8 @@ var choMan = document.getElementById('choman'),
     clear = document.getElementById('clear'),
     title = document.getElementById('title'),
     p = document.getElementById('p'),
-    rewardsInfo = document.getElementById('rewardsinfo');
+    rewardsInfo = document.getElementById('rewardsinfo'),
+    winList = document.getElementById('winlist');
 
 addrew.value = '添加奖品';
 incman.value = '设定人数';
@@ -83,6 +85,7 @@ rewardsInfo.onclick = function (e) {
 		viaRewards(name);
 	}
 };
+manualAddbtn.onclick = manual;
 
 function viaRewards(name) {
 	for (var i = 0; i < rewardsArr.length; i++) {
@@ -138,6 +141,15 @@ function stop(timer){
 		p.appendChild(info);
 		reduceReward(1, rewindex - 1);
 		showInfo();
+		var alist = document.createElement('a'),
+			winText = '获奖者:' 
+					+ (mannum == 0 ? ('奖品 ') : (mannum + '号，奖品 ')) 
+					+ reward.name,
+			textnode = document.createTextNode(winText);
+		alist.setAttribute('href', '#');
+		alist.setAttribute('class', 'list-group-item');
+		alist.appendChild(textnode);
+		winList.appendChild(alist);
 	}
 	flag = false;
 }
@@ -200,4 +212,12 @@ function init() {
 	var rewards = document.getElementById('rewards');
 		rewards.innerHTML = '';
 	p.innerHTML = '';
+}
+function manual() {
+	var manualAdd = document.getElementById('manual');
+	var memberNum = +(manualAdd.value);
+	if (memberNum <= manArrLength && enable2) {
+		mannum = memberNum;
+		flag = true;
+	}
 }
