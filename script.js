@@ -7,6 +7,7 @@ var mannum = 0,
 var enable1 = false,
 	enable2 = false;
 var manArrLength, rewArrLength;
+var winnerList = [];
 //var rewArrLength = rewardsArr.length - 1;
 //var manArrLength = 100; //此处修改人数
 
@@ -118,12 +119,18 @@ function randomNum(min, max){
 	return num;
 }
 function randomMan(min, max) {
-	var num = parseInt(Math.random() * (max - min) + 1);
+	while (true) {
+		var num = parseInt(Math.random() * (max - min) + 1);
+		if (winnerList.indexOf(num) == -1)
+			break;
+	}
 	return num;
 }
 function startMan(){
-	clearInterval(timer);
-	timer = setInterval(choM, 50);
+	if (winnerList.length < manArrLength) {
+		clearInterval(timer);
+		timer = setInterval(choM, 50);
+	}
 }
 function startRew(){
 	clearInterval(timer);
@@ -133,6 +140,8 @@ function startRew(){
 function stop(timer){
 	clearInterval(timer);
 	if (flag) {
+		if (winnerList.indexOf(mannum) == -1 && mannum)
+			winnerList.push(mannum);
 		p.innerHTML = '';
 		var text = '恭喜你' 
 				 + (mannum == 0 ? ('赢得了 ') : (mannum + '号，你赢得了 '))
@@ -151,6 +160,7 @@ function stop(timer){
 		alist.appendChild(textnode);
 		winList.appendChild(alist);
 	}
+	mannum = 0;
 	flag = false;
 }
 function addReward(rewName, number) {
@@ -218,6 +228,8 @@ function manual() {
 	var memberNum = +(manualAdd.value);
 	if (memberNum <= manArrLength && enable2) {
 		mannum = memberNum;
+		if (winnerList.indexOf(mannum) == -1 && mannum)
+			winnerList.push(memberNum);
 		flag = true;
 	}
 }
